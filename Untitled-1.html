@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled and Interactive Webpage</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 5px #888888;
+        }
+        a {
+            color: #00a600;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to My Styled and Interactive Webpage!</h1>
+
+    <p>This paragraph has some basic styling applied using CSS. We've changed the font, added some spacing, and set background and text colors to make it look a bit more interesting.</p>
+
+    <img src="your-image.jpg" alt="A styled image" width="400">
+
+    <p>You can still find a <a href="https://en.wikipedia.org/wiki/Rose" target="_blank">Rose</p>
+
+    <button onclick="showAlert()">Click Me!</button>
+
+    <script>
+        function showAlert() {
+            alert("Hello! You clicked the button.");
+        }
+    </script>
+</body>
+</html>
