@@ -2,118 +2,230 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Task 2 - Intermediate Web Dev</title>
+  <title>Modern Portfolio</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      color: #333;
     }
-    /* Responsive layout using Flexbox and Grid */
-    .container {
+    header {
+      background: #333;
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    nav {
+      background: #f0f0f0;
+      padding: 15px;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #0073e6;
+      font-weight: bold;
+    }
+    main {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* To-Do Styles */
+    .todo input {
+      width: 70%;
+    }
+    .todo li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px;
+      background: #e8f0fe;
+      border-radius: 5px;
+      margin: 5px 0;
+    }
+    .todo li button {
+      background: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    /* Product Card Styles */
+    .product-list {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
     }
-    .form-section, .todo-section, .gallery-section {
-      flex: 1 1 300px;
-      border: 1px solid #ccc;
+    .product-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      padding: 15px;
+      width: 220px;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
       padding: 20px;
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 600px) {
-      .container {
-        flex-direction: column;
-      }
-    }
-
-    /* Grid for gallery */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: 10px;
-    }
-    .gallery img {
-      width: 100%;
-      height: auto;
+    select {
+      padding: 5px;
+      margin: 10px;
     }
   </style>
 </head>
 <body>
 
-  <h1>Intermediate HTML, CSS, and JavaScript</h1>
-  <div class="container">
+<header>
+  <h1>Praneeth Portfolio</h1>
+</header>
 
-    <!-- Contact Form -->
-    <div class="form-section">
-      <h2>Contact Form</h2>
-      <form id="contactForm">
-        <label>Name: <input type="text" id="name" required></label><br><br>
-        <label>Email: <input type="email" id="email" required></label><br><br>
-        <input type="submit" value="Submit">
-      </form>
-      <p id="formMessage" style="color: green;"></p>
-    </div>
+<nav>
+  <a href="#about">About</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<main>
+  <section id="about" class="card">
+    <h2>About Me</h2>
+    <p>Hello! I'm a web developer exploring the world of HTML, CSS, and JavaScript through fun projects.</p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
 
     <!-- To-Do List -->
-    <div class="todo-section">
-      <h2>To-Do List</h2>
-      <input type="text" id="todoInput" placeholder="Add a task">
-      <button onclick="addTodo()">Add</button>
+    <div class="card todo">
+      <h3>Task Manager</h3>
+      <input type="text" id="todoInput" placeholder="Enter a task">
+      <button onclick="addTodo()">Add Task</button>
       <ul id="todoList"></ul>
     </div>
 
-    <!-- Image Gallery -->
-    <div class="gallery-section">
-      <h2>Image Gallery</h2>
-      <input type="text" id="imageURL" placeholder="Paste image URL">
-      <button onclick="addImage()">Add Image</button>
-      <div class="gallery" id="imageGallery"></div>
+    <!-- Product Listing -->
+    <div class="card">
+      <h3>Shop Products</h3>
+      <div>
+        <label>Category:</label>
+        <select id="categoryFilter">
+          <option value="All">All</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Books">Books</option>
+        </select>
+
+        <label>Sort by:</label>
+        <select id="sortOption">
+          <option value="price">Price</option>
+          <option value="rating">Rating</option>
+        </select>
+      </div>
+
+      <div class="product-list" id="productList"></div>
     </div>
+  </section>
 
-  </div>
+  <section id="contact" class="card">
+    <h2>Contact</h2>
+    <p>Email: veerapraneeth071@gmail.com</p>
+  </section>
+</main>
 
-  <script>
-    // JavaScript Form Validation
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      if (name === '' || email === '') {
-        alert('Please fill all fields.');
-      } else {
-        document.getElementById('formMessage').innerText = "Form submitted successfully!";
-        this.reset();
-      }
+<footer>
+  <p>&copy; 2025 My Modern Portfolio</p>
+</footer>
+
+<script>
+  // To-Do List
+  const todoList = document.getElementById('todoList');
+  let savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+
+  function renderTodos() {
+    todoList.innerHTML = '';
+    savedTodos.forEach((task, i) => {
+      const li = document.createElement('li');
+      li.innerHTML = `${task} <button onclick="deleteTodo(${i})">X</button>`;
+      todoList.appendChild(li);
     });
+  }
 
-    // To-Do List Function
-    function addTodo() {
-      const input = document.getElementById('todoInput');
-      const task = input.value.trim();
-      if (task !== '') {
-        const li = document.createElement('li');
-        li.textContent = task;
-        li.onclick = () => li.remove();
-        document.getElementById('todoList').appendChild(li);
-        input.value = '';
-      }
+  function addTodo() {
+    const input = document.getElementById('todoInput');
+    if (input.value.trim()) {
+      savedTodos.push(input.value.trim());
+      input.value = '';
+      saveTodos();
     }
+  }
 
-    // Image Gallery Function
-    function addImage() {
-      const url = document.getElementById('imageURL').value.trim();
-      if (url !== '') {
-        const img = document.createElement('img');
-        img.src = url;
-        img.alt = 'User Image';
-        img.onclick = () => img.remove();
-        document.getElementById('imageGallery').appendChild(img);
-        document.getElementById('imageURL').value = '';
-      }
-    }
-  </script>
+  function deleteTodo(index) {
+    savedTodos.splice(index, 1);
+    saveTodos();
+  }
+
+  function saveTodos() {
+    localStorage.setItem('todos', JSON.stringify(savedTodos));
+    renderTodos();
+  }
+
+  renderTodos();
+
+  // Product Listing
+  const products = [
+    { name: "Smartphone", category: "Electronics", price: 499, rating: 4.5 },
+    { name: "Laptop", category: "Electronics", price: 999, rating: 4.7 },
+    { name: "Novel", category: "Books", price: 20, rating: 4.2 },
+    { name: "Notebook", category: "Books", price: 5, rating: 3.9 }
+  ];
+
+  function updateProductList() {
+    const category = document.getElementById('categoryFilter').value;
+    const sort = document.getElementById('sortOption').value;
+
+    let filtered = category === "All" ? products : products.filter(p => p.category === category);
+    filtered.sort((a, b) => a[sort] - b[sort]);
+
+    displayProducts(filtered);
+  }
+
+  function displayProducts(list) {
+    const productList = document.getElementById('productList');
+    productList.innerHTML = '';
+    list.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'product-card';
+      div.innerHTML = `
+        <h4>${p.name}</h4>
+        <p>Category: ${p.category}</p>
+        <p>Price: $${p.price}</p>
+        <p>Rating: ${p.rating}</p>
+      `;
+      productList.appendChild(div);
+    });
+  }
+
+  document.getElementById('categoryFilter').addEventListener('change', updateProductList);
+  document.getElementById('sortOption').addEventListener('change', updateProductList);
+
+  updateProductList(); // Initial load
+</script>
 
 </body>
 </html>
